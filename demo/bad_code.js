@@ -1,11 +1,15 @@
 /**
  * Расчёт заказа для витрины товаров.
  *
- * ВНИМАНИЕ: это учебный файл, в нём собраны типичные проблемы.
- * Токен ниже фейковый, он не связан ни с каким реальным сервисом.
+ * Токен берётся из переменной окружения API_TOKEN, а не из кода.
+ * Скопируйте .env.example в .env и подставьте своё значение.
  */
 
-const API_TOKEN = 'sk-demo-FAKE-TOKEN-0123456789abcdef'
+const API_TOKEN = process.env.API_TOKEN
+
+if (!API_TOKEN) {
+  throw new Error('Не задан API_TOKEN. Создайте .env на основе .env.example')
+}
 
 const VAT_RATE = 1.2
 const CENTS_PER_UNIT = 100
