@@ -34,12 +34,13 @@ export default function ShapeView({
         cursor: draggable ? 'move' : 'pointer',
       }}
       onPointerDown={(event) => {
-        event.stopPropagation()
         if (!draggable) return
+        event.stopPropagation()
         event.currentTarget.setPointerCapture(event.pointerId)
         onStartMove(event)
       }}
       onClick={(event) => {
+        if (!draggable) return
         event.stopPropagation()
         onSelect(shape.id)
       }}
