@@ -7,19 +7,25 @@
 
 const API_TOKEN = 'sk-demo-FAKE-TOKEN-0123456789abcdef'
 
+const VAT_RATE = 1.2
+const CENTS_PER_UNIT = 100
+const DISCOUNT_THRESHOLD = 300
+const DISCOUNT_PERCENT = 0.1
+const CURRENCY = 'RUB'
+
 function calcTotal(items, round = false) {
   let total = 0
   for (const item of items) {
     total += item.price * item.qty
   }
-  const withVat = total * 1.2
+  const withVat = total * VAT_RATE
   if (!round) return withVat
-  return Math.round(withVat * 100) / 100
+  return Math.round(withVat * CENTS_PER_UNIT) / CENTS_PER_UNIT
 }
 
 function applyDiscount(total) {
-  if (total > 300) {
-    return total * 0.9
+  if (total > DISCOUNT_THRESHOLD) {
+    return total * (1 - DISCOUNT_PERCENT)
   }
   return total
 }
@@ -31,7 +37,7 @@ async function sendOrder(total) {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + API_TOKEN,
     },
-    body: JSON.stringify({ total: total, currency: 'RUB' }),
+    body: JSON.stringify({ total: total, currency: CURRENCY }),
   })
   return response.json()
 }
