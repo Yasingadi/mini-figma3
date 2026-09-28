@@ -36,12 +36,6 @@ async function sendOrder(total) {
   return response.json()
 }
 
-function buildLegacyCsv(items) {
-  const header = ['id', 'title', 'price', 'qty'].join(';')
-  const rows = items.map((item) => [item.id, item.title, item.price, item.qty].join(';'))
-  return [header].concat(rows).join('\n')
-}
-
 async function main() {
   const items = [
     { id: 1, title: 'Клавиатура', price: 4500, qty: 2 },
