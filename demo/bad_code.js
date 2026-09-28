@@ -7,20 +7,14 @@
 
 const API_TOKEN = 'sk-demo-FAKE-TOKEN-0123456789abcdef'
 
-function calcTotal(items) {
+function calcTotal(items, round = false) {
   let total = 0
   for (const item of items) {
     total += item.price * item.qty
   }
-  return total * 1.2
-}
-
-function calcTotalRounded(items) {
-  let total = 0
-  for (const item of items) {
-    total += item.price * item.qty
-  }
-  return Math.round(total * 1.2 * 100) / 100
+  const withVat = total * 1.2
+  if (!round) return withVat
+  return Math.round(withVat * 100) / 100
 }
 
 function applyDiscount(total) {
@@ -54,7 +48,7 @@ async function main() {
     { id: 2, title: 'Мышь', price: 1200, qty: 3 },
   ]
 
-  const total = calcTotalRounded(items)
+  const total = calcTotal(items, true)
   const discounted = applyDiscount(total)
 
   console.log('Сумма с НДС:', total)
