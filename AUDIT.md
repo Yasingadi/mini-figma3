@@ -20,13 +20,14 @@
 ## Что проверял
 
 - **Git:** текущая ветка, рабочее дерево, расхождение с `main`, список веток, remotes, upstream, stash, состояние на remote через `ls-remote`.
-- **Структура:** 37 файлов вне `node_modules`/`dist`/`.git`.
+- **Структура:** 35 файлов вне `node_modules`/`dist`/`.git`.
 - **Конфиги:** `package.json`, `vite.config.ts`, `tsconfig.*`, `.oxlintrc.json`, `.gitignore`, `opencode.json`, `.github/workflows/deploy.yml`.
 - **Код:** `src/App.tsx`, `main.tsx`, `index.css`, 4 компонента, 3 хука, `utils/geometry.ts`, `constants/*`, `types/*`.
 - **Статика и скрипты:** `index.html`, `webpage/index.html`, `start.cmd`, `README.md`, `public/*`.
 - **Безопасность:** поиск секретов в коде, конфигах, workflow и в истории git; поиск опасных приёмов (`dangerouslySetInnerHTML`, `eval`, `innerHTML`, хранилища браузера, `console.log`, небезопасные ссылки, `target="_blank"`); проверка правил игнорирования `.env`.
 - **Мёртвый код и дубли:** поиск ссылок на каждый экспорт, поиск повторяющихся функций.
 - **Проверки:** `npm run lint` (0 ошибок), `npm run build` (успешно), `npx tsc -b --force` (exit 0).
+- **Merge day:** слияние двух веток в `main`, `node --check` для `demo/bad_code.js`, `npm run lint`, `npm run build`, HTTP-проверка собранной страницы и живого сайта после деплоя, состояние remote через `ls-remote` и `gh run list`.
 
 **Секретов в коде и в истории git не найдено.** Опасных приёмов в коде не найдено. `dist/` и `node_modules/` в git не попадают. `package-lock.json` закоммичен — правильно.
 
